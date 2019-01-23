@@ -1,0 +1,28 @@
+<form name="form" (ngSubmit)="editForm.form.valid && saveSensor()" #editForm="ngForm" novalidate>
+    <div class="form-group">
+        <label for="nameSensor">Nazwa czujnika</label>
+        <input type="text" class="form-control" name="nameValueSensor" [(ngModel)]="name" #nameSensor="ngModel" [ngClass]="{ 'is-invalid': editForm.submitted && nameSensor.invalid }" required />
+        <div *ngIf="editForm.submitted && nameSensor.invalid" class="invalid-feedback">
+            <div *ngIf="nameSensor.errors.required" class="text-danger">Nazwa czujnika jest wymagana</div>
+            
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="minValueSensor">Minimalna wartość : {{minValue}}   </label>
+        <input type="range" min="0" max="100" class="form-control" name="minValueSensor" [(ngModel)]="minValue" #minValueSensor="ngModel" [ngClass]="{ 'is-invalid': editForm.submitted && minValueSensor.invalid }" required />
+        <div *ngIf="editForm.submitted && minValueSensor.invalid" class="invalid-feedback">
+            <div *ngIf="minValueSensor.errors.required" class="text-danger">Wymagane jest podanie liczby</div>
+        </div>
+    </div>
+    <div class="form-group">
+        
+        <label for="maxValueSensor">Maksymalna wartość : {{maxValue}}</label>
+        <input type="range" min="0" max="100" class="form-control" name="maxValueSensor" [(ngModel)]="maxValue" #maxValueSensor="ngModel" [ngClass]="{ 'is-invalid': editForm.submitted && maxValueSensor.invalid }" required />
+        <div *ngIf="editForm.submitted && maxValueSensor.invalid" class="invalid-feedback">
+            <div *ngIf="maxValueSensor.errors.required" class="text-danger">Wymagane jest podanie liczby</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary">Zapisz</button>
+    </div>
+    </form>

@@ -1,0 +1,170 @@
+<div  class="m_tab panel-footer" >
+<h3><u><b>Czujniki temperatury</b></u></h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Lp.</th>
+      <th scope="col">Nazwa</th>
+      <th scope="col">Wartość minimalna</th>
+      <th scope="col">Wartość obecna</th>
+      <th scope="col">Wartość maksymalna</th>
+      <th scope="col">Operacje</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let ts of temperatureSensors ; index as i">
+    <tr>
+      <td>{{i+1}}</td>
+      <td>{{ts.name}}</td>
+      <td>{{ts.minValue}}</td>
+      <td>{{ts.temperature | number: '1.1-2'}}</td>
+      <td>{{ts.maxValue}}</td>
+      <td>
+          <div class="btn-group" role="group">
+              <button type="button" class="btn btn-primary btn-sm" (click)="editSensor(ts.sensorId)">Edytuj czujnik</button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="delSensor(ts.sensorId)">Usuń czujnik</button>     
+            </div> 
+      </td>
+    </tr>
+    <tr *ngIf="selectedSensor == ts.sensorId && operacja !=0"> 
+      <td colspan="6">
+        <div>
+          <app-edit-sensor    [sensorId]="ts.sensorId" 
+                              [sensorType]="ts.type"
+                              [name]="ts.name" 
+                              [minValue]="ts.minValue" 
+                              [maxValue]="ts.maxValue" 
+                              [houseId]="houseId"
+                              [coordinateX]="ts.coordinateX"
+                              [coordinateY]="ts.coordinateY">
+          </app-edit-sensor></div>      
+      </td>
+    </tr> 
+
+  </tbody>
+</table>
+
+  
+
+<div *ngIf="humiditySensors.length>0">
+<h3><u><b>Czujniki wilgotności</b></u></h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Lp.</th>
+      <th scope="col">Nazwa</th>
+      <th scope="col">Wartość minimalna</th>
+      <th scope="col">Wartość obecna</th>
+      <th scope="col">Wartość maksymalna</th>
+      <th scope="col">Operacje</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let hs of humiditySensors; index as i">
+      <tr>
+          <td>{{i+1}}</td>
+          <td>{{hs.name}}</td>
+          <td>{{hs.minValue}}</td>
+          <td>{{hs.humidity | number: '1.1-2'}}</td>
+          <td>{{hs.maxValue}}</td>
+          <td>
+              <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-primary btn-sm" (click)="editSensor(hs.sensorId)">Edytuj czujnik</button>
+                  <button type="button" class="btn btn-danger btn-sm" (click)="delSensor(hs.sensorId)">Usuń czujnik</button>     
+                </div> 
+             </td>
+      </tr>
+      <tr *ngIf="selectedSensor == hs.sensorId && operacja !=0"> 
+        <td colspan="6">
+          <div>
+              <app-edit-sensor    [sensorId]="hs.sensorId" 
+                                  [sensorType]="hs.type"
+                                  [name]="hs.name" 
+                                  [minValue]="hs.minValue" 
+                                  [maxValue]="hs.maxValue" 
+                                  [houseId]="houseId"
+                                  [coordinateX]="hs.coordinateX"
+                                  [coordinateY]="hs.coordinateY">
+              </app-edit-sensor>
+            </div>     
+        </td>
+      </tr> 
+  </tbody>
+</table >
+</div>
+<div *ngIf="smokeSensors.length>0">
+<h3><u><b>Czujniki dymu</b></u></h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Lp.</th>
+      <th scope="col">Nazwa</th>
+      <th scope="col">Wartość minimalna</th>
+      <th scope="col">Wartość obecna</th>
+      <th scope="col">Wartość maksymalna</th>
+      <th scope="col">Operacje</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let ss of smokeSensors; index as i">
+      <tr>
+          <td>{{i+1}}</td>
+          <td>{{ss.name}}</td>
+          <td>{{ss.minValue}}</td>
+          <td>{{ss.smoke | number: '1.1-2'}}</td>
+          <td>{{ss.maxValue}}</td>
+          <td>
+              <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-primary btn-sm" (click)="editSensor(ss.sensorId)">Edytuj czujnik</button>
+                  <button type="button" class="btn btn-danger btn-sm" (click)="delSensor(ss.sensorId)">Usuń czujnik</button>     
+                </div> 
+             </td>
+      </tr>
+        <tr *ngIf="selectedSensor == ss.sensorId && operacja !=0"> 
+           <td colspan="6">
+             <div>
+                <app-edit-sensor    [sensorId]="ss.sensorId" 
+                                    [sensorType]="ss.type"
+                                    [name]="ss.name" 
+                                    [minValue]="ss.minValue" 
+                                    [maxValue]="ss.maxValue" 
+                                    [houseId]="houseId"
+                                    [coordinateX]="ss.coordinateX"
+                                    [coordinateY]="ss.coordinateY">
+                </app-edit-sensor>
+              </div>      
+          </td>
+        </tr> 
+  </tbody>
+</table >
+</div>
+<div *ngIf="motionSensors.length>0">
+<h3><u><b>Czujniki ruchu</b></u></h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Lp.</th>
+      <th scope="col">Nazwa</th>
+      <th scope="col">Wartość obecna</th>
+      <th colspan="2">flaga</th>
+      <th scope="col">Operacje</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let ms of motionSensors; index as i">
+      <tr>
+          <td>{{i+1}}</td> 
+          <td>{{ms.name}}</td>
+          <td>{{ms.isMove}}</td>
+          <td colspan="2">{{ms.isOn}}</td>
+          <td>
+          <div class="btn-group" role="group">
+              <button type="button" class="btn btn-danger btn-sm" (click)="delSensor(ms.sensorId)">Usuń czujnik</button>     
+            </div> 
+         </td>
+      </tr>
+  </tbody>
+</table >
+
+</div>
+
+
+</div>
+
+
